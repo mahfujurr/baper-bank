@@ -1,35 +1,50 @@
+function getInputFieldValueBYId(inputFieldId){
+        const inputField = document.getElementById(inputFieldId);
+        const inputFieldIdstring = inputField.value;
+        const inputFieldValue = parseFloat(inputFieldIdstring);
+        inputField.value = '';
+        return inputFieldValue;
+    
+}
+
+function getElementValueById(elementId){
+    const textelementId = document.getElementById(elementId);
+    const elementIdString = textelementId.innerText;
+    const value = parseFloat(elementIdString);
+    return value;
+}
+
+function setTextElementById(elementId, newValue){
+    const textElement = document.getElementById(elementId);
+    textElement.innerText = newValue;
+}
+
 document.getElementById('deposit-btn').addEventListener('click', function(){
-    const depositField = document.getElementById('deposit-field');
-    const newdepositValue = depositField.value;
+    const newDepositAmount = getInputFieldValueBYId('deposit-field');
+    const prevDepositTotal = getElementValueById('deposit-amount');
+    const newDepositTotal = newDepositAmount + prevDepositTotal;
+    setTextElementById('deposit-amount', newDepositTotal);
 
-    const depositChange = document.getElementById('deposit-ammount');
-    const prevdepositamount = depositChange.innerText;
+    const prevtotalAmount = getElementValueById('total-amount');
+
     
-    const currentDepositTotal = parseFloat(newdepositValue) + parseFloat(prevdepositamount);
-    depositChange.innerText = currentDepositTotal;
+    const newTotal = prevtotalAmount + newDepositAmount;
 
-    const totalAmountevent = document.getElementById('total-amount');
-    const prevtotalAmount = totalAmountevent.innerText;
-    const currenttotalAmountevent = parseFloat(prevtotalAmount) + parseFloat(newdepositValue);
-    totalAmountevent.innerText = currenttotalAmountevent;
-
-    depositField.value = '';
+    setTextElementById('total-amount', newTotal);
+    
 })
+
 document.getElementById('withdraw-btn').addEventListener('click', function(){
-    const withdrawField = document.getElementById('withdraw-field');
-    const newwithdrawValue = withdrawField.value;
+    const newDepositAmount = getInputFieldValueBYId('withdraw-field');
+    const prevDepositTotal = getElementValueById('withdraw-amount');
+    const newDepositTotal = newDepositAmount + prevDepositTotal;
+    setTextElementById('withdraw-amount', newDepositTotal);
 
-    const withdrawChange = document.getElementById('withdraw-ammount');
-    const prevwithdrawamount = withdrawChange.innerText;
+    const prevtotalAmount = getElementValueById('total-amount');
+
     
-    const currentwithdrawTotal = parseFloat(newwithdrawValue) + parseFloat(prevwithdrawamount);
-    withdrawChange.innerText = currentwithdrawTotal;
+    const newTotal = prevtotalAmount - newDepositAmount;
 
-    //Total
-    const totalAmountevent = document.getElementById('total-amount');
-    const prevtotalAmount = totalAmountevent.innerText;
-    const currenttotalAmountevent = parseFloat(prevtotalAmount) - parseFloat(newwithdrawValue);
-    totalAmountevent.innerText = currenttotalAmountevent;
-
-    withdrawField.value = '';
+    setTextElementById('total-amount', newTotal);
+    
 })
